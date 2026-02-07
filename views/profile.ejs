@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #0f0f0f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
+    .profile-card {
+      background: #1c1c1c;
+      width: 360px;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .profile-img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      margin: auto;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      margin: 10px 0 5px;
+    }
+
+    .email {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .role {
+      font-size: 13px;
+      color: #ff4b2b;
+      margin-bottom: 20px;
+    }
+
+    .links a {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      background: #2c2c2c;
+      transition: 0.3s;
+    }
+
+    .links a:hover {
+      background: #ff4b2b;
+    }
+
+    .logout {
+      margin-top: 15px;
+      display: inline-block;
+      color: #ff4b2b;
+      text-decoration: none;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-card">
+
+    <!-- Profile Icon -->
+    <div class="profile-img">
+      👤
+    </div>
+
+    <!-- Name & Email -->
+    <h2><%= user.name %></h2>
+    <div class="email"><%= user.email %></div>
+    <div class="role"><%= user.role.toUpperCase() %></div>
+
+    <!-- Role Based Section -->
+    <div class="links">
+      <% if (user.role === "admin") { %>
+        <a href="/admin/dashboard">Admin Dashboard</a>
+        <a href="/admin/add-movie">Add Movie</a>
+        <a href="/admin/add-screen">Add Screen</a>
+        <a href="/admin/add-show">Add Show</a>
+      <% } else { %>
+        <a href="/home">View Movies</a>
+        <a href="/profile/ticket">My Tickets</a>
+      <% } %>
+    </div>
+
+    <a href="/logout" class="logout">Logout</a>
+  </div>
+
+</body>
+</html>

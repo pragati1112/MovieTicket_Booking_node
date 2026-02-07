@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up | TicketBook</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <div class="netflix-navbar">
+        <div class="logo">ticketBook</div>
+        <a href="/login" class="btn-login" style="text-decoration: none;">Sign In</a>
+    </div>
+
+    <div class="auth-wrapper">
+        <div class="auth-box">
+            <h1 class="auth-title">Sign Up</h1>
+            
+            <% if (locals.error) { %>
+                <div class="error-msg"><%= error %></div>
+            <% } %>
+
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-input" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-input" placeholder="Email address" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-input" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="cpassword" class="form-input" placeholder="Confirm Password" required>
+                </div>
+                
+                <button type="submit" class="btn-submit">Sign Up</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="/login">Sign in now</a>.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

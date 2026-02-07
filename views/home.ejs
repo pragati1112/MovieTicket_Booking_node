@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Booking</title>
+    <!-- Use Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="netflix-navbar">
+        <div class="logo">ticketBook</div>
+        <div class="nav-links">
+            <a href="/home" class="active">Home</a>
+            <a href="#">Movies</a>
+            <a href="#">New & Popular</a>
+            <a href="#">My List</a>
+        </div>
+        <div class="nav-right">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+            </div>
+            <% if(user) { %>
+                <span class="user-greeting">Hi, <%= user.name %></span>
+                <a href="/profile" class="btn-icon"><i class="fas fa-user"></i></a>
+                <a href="/logout" class="btn-logout">Logout</a>
+            <% } else { %>
+                 <button onclick="window.location.href='/login'" class="btn-login">
+                    Login
+                </button>
+                <button onclick="window.location.href='/register'" class="btn-register">
+                    Register
+                </button>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <% if (movies.length > 0) { 
+            const featuredMovie = movies[0]; 
+        %>
+            <div class="hero-bg" style="background-image: url('<%= featuredMovie.image || '/images/banner-1.avif' %>');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title"><%= featuredMovie.title %></h1>
+                <p class="hero-desc">
+                    <%= featuredMovie.language %> | <%= featuredMovie.duration %> min <br>
+                    Experience the latest blockbuster on the big screen.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/movie/<%= featuredMovie._id %>" class="btn-hero btn-play">
+                        <i class="fas fa-ticket-alt"></i> Book Now
+                    </a>
+                    <button class="btn-hero btn-info">
+                        <i class="fas fa-info-circle"></i> More Info
+                    </button>
+                </div>
+            </div>
+        <% } else { %>
+            <div class="hero-bg" style="background-image: url('/images/banner-1.avif');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to TicketBook</h1>
+                <p class="hero-desc">Book tickets for the latest movies and events.</p>
+            </div>
+        <% } %>
+    </header>
+
+    <!-- Content Rows -->
+    <div class="main-content">
+        
+        <!-- Section 1: Now Showing -->
+        <section class="row-section">
+            <h2 class="row-header">Now Showing</h2>
+            <div class="row-container">
+                <div class="row-slider">
+                    <% if(movies.length > 0) { %>
+                        <% movies.forEach(movie => { %>
+                            <div class="movie-card">
+                                <img src="<%= movie.image || '/images/rec-1.avif' %>" alt="<%= movie.title %>">
+                                <div class="card-content">
+                                    <h4><%= movie.title %></h4>
+                                    <p><%= movie.language %></p>
+                                    <a href="/movie/<%= movie._id %>" class="btn-book-sm">Book</a>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="no-data">No movies available.</p>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Trending (Reusing movies for demo) -->
+        <section class="row-section">
+            <h2 class="row-header">Trending Now</h2>
+            <div class="row-container">
+                <div class="row-slider">
+                    <!-- Duplicate logic to simulate content -->
+                    <% if(movies.length > 0) { %>
+                        <% movies.slice().reverse().forEach(movie => { %>
+                            <div class="movie-card">
+                                <img src="<%= movie.image || '/images/p-1.avif' %>" alt="<%= movie.title %>">
+                                <div class="card-content">
+                                    <h4><%= movie.title %></h4>
+                                    <p><%= movie.language %></p>
+                                    <a href="/movie/<%= movie._id %>" class="btn-book-sm">Book</a>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Premieres -->
+        <section class="row-section">
+            <h2 class="row-header">Premieres</h2>
+            <div class="row-container">
+                <div class="row-slider">
+                     <div class="movie-card">
+                        <img src="/images/p-1.avif" class="rec">
+                        <div class="card-content"><h4>The Travellers</h4></div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/images/p-2.avif" class="rec">
+                        <div class="card-content"><h4>What We Wanted</h4></div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/images/p-3.avif" class="rec">
+                        <div class="card-content"><h4>Pets on a Train</h4></div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/images/p-4.avif" class="rec">
+                        <div class="card-content"><h4>Mrigtrushana</h4></div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/images/p-5.avif" class="rec">
+                        <div class="card-content"><h4>Nuclear Now</h4></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="netflix-footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#">Audio Description</a></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Gift Cards</a></li>
+                <li><a href="#">Media Center</a></li>
+                <li><a href="#">Investor Relations</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Legal Notices</a></li>
+                <li><a href="#">Cookie Preferences</a></li>
+                <li><a href="#">Corporate Information</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <p class="copyright">&copy; 2024 TicketBook, Inc.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
